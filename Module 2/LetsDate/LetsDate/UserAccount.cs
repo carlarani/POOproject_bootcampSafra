@@ -16,6 +16,8 @@ public class UserAccount
     private int _ageRangeMin;
     private int _ageRangeMax;
     private List<Like> _likesReceived;
+    private List<Like> _likesGiven;
+    private List<Like> _dislikesGiven;
 
     public UserAccount(string password, string firstName, int age, Location location)
     {
