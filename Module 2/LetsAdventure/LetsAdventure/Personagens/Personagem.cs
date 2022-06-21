@@ -4,15 +4,6 @@ namespace LetsAdventure;
 
 public class Personagem
 {
-    protected string? _nome;
-    protected int _vida;
-    protected int _dano;
-    protected int _defesa;
-    protected int _agilidade;
-    protected int _nivel;
-    protected string _img;
-    protected Habilidade _habilidade;
-
     public string? Nome { get; set; }
 
     public int Vida { get; set; }
@@ -33,11 +24,11 @@ public class Personagem
     {
         if (usaHabilidade)
         {
-            _vida -= (personagemAtacante._dano + personagemAtacante.Habilidade.DanoExtra) * (100 / (100 + _defesa));
+            Vida -= (personagemAtacante.Dano + personagemAtacante.Habilidade.DanoExtra) * (100 / (100 + Defesa));
             return;
         }
 
-        _vida -= personagemAtacante._dano * (100 / (100 + _defesa));
+        Vida -= personagemAtacante.Dano * (100 / (100 + Defesa));
     }
 
     public void Ataque(Personagem personagemAtacado, bool usaHabilidade = false)

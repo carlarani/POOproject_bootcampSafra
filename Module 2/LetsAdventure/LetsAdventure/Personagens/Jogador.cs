@@ -2,13 +2,7 @@ namespace LetsAdventure;
 
 public class Jogador : Personagem
 {
-    protected Dictionary<Item, int> itens;
-    protected int _vidaMaxima;
-    protected int _pontos = 0;
-
     public Dictionary<Item, int> Itens { get; private set; }
-
-    public new int Nivel { get; }
 
     public int Pontos { get; protected set; }
 
@@ -17,31 +11,31 @@ public class Jogador : Personagem
     public Jogador(string nome)
     {
         Nome = nome;
-        itens = new Dictionary<Item, int>();
+        Itens = new Dictionary<Item, int>();
         Vida = 100;
         Nivel = 1;
         Defesa = 10;
         Dano = 10;
         Agilidade = 10;
-        _vidaMaxima = Vida;
+        VidaMaxima = Vida;
     }
 
-    public void GanhaPontos(Monstro monstro)
+    public void GanhaPontos()
     {
-        _pontos += 500 * (monstro.Nivel - 1) / 10 + 500;
+        Pontos += 500 * (1 - 1) / 10 + 500;
         ProximoNivel();
     }
 
     protected virtual void ProximoNivel()
     {
-        var proximoNivel = 500 * (Nivel ^ 2) - 500 * Nivel;
-        if (_pontos < proximoNivel) return;
-        _pontos -= proximoNivel;
-        Defesa += 10;
+        var proximoNivel =  500 * Math.Pow(Nivel, 2) - 500 * Nivel;
+        Console.WriteLine("Proximo nivel" + proximoNivel);
+        if (Pontos < proximoNivel) return;
+        Pontos -= (int) proximoNivel;
         Dano += 10;
         Agilidade += 10;
-        _vidaMaxima += 20;
-        _nivel += 1;
+        VidaMaxima += 20;
+        Nivel += 1;
     }
 
     public bool Fugir(Monstro monstro)
@@ -53,14 +47,14 @@ public class Jogador : Personagem
 
     public void UsarItem(int posicaoItem)
     {
-        var item = itens.ElementAt(posicaoItem);
+        var item = Itens.ElementAt(posicaoItem);
         item.Key.Efeito(this);
         if (item.Value - 1 == 0)
         {
-            itens.Remove(item.Key);
+            Itens.Remove(item.Key);
             return;
         }
-        itens[item.Key] = item.Value - 1;
+        Itens[item.Key] = item.Value - 1;
     }
 
     public virtual void UsarHabilidade(Personagem personagemAtacado)

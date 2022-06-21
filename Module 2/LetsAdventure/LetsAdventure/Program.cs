@@ -1,2 +1,3 @@
 ﻿using LetsAdventure;
-Console.Write("Let's Adventure");
+Console.WriteLine("Let's Adventure");
+Mago mago = new Mago("Boen");
