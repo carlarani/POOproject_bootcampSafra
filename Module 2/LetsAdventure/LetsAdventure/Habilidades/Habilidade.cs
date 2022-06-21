@@ -1,4 +1,4 @@
-namespace LetsAdventure;
+namespace LetsAdventure.Habilidades;
 
 public class Habilidade
 {
@@ -7,5 +7,5 @@ public class Habilidade
 
     public string Nome { get; set; }
 
-    public int DanoExtra { get; set; }
+    public int DanoExtra { get; protected set; }
 }

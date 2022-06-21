@@ -14,7 +14,7 @@ public class Jogador : Personagem
     
     public int VidaMaxima { get; protected set; }
 
-    protected Jogador(string nome)
+    public Jogador(string nome)
     {
         Nome = nome;
         itens = new Dictionary<Item, int>();

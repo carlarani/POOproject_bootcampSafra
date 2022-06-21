@@ -1,6 +1,6 @@
 namespace LetsAdventure;
 
-public class Item
+public class PocaoCura : Item
 {
     
 }
