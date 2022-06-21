@@ -6,5 +6,7 @@ public class Item
 
     public string? Nome { get; protected set; }
 
-    public void efeito() { }
+    public virtual void Efeito(Jogador jogador) { }
+    
+    public virtual void Efeito(Mago mago) { }
 }

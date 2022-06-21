@@ -11,7 +11,7 @@ public class Jogador : Personagem
     public new int Nivel { get; }
 
     public int Pontos { get; protected set; }
-    
+
     public int VidaMaxima { get; protected set; }
 
     public Jogador(string nome)
@@ -28,14 +28,14 @@ public class Jogador : Personagem
 
     public void GanhaPontos(Monstro monstro)
     {
-        _pontos += ((500 * (monstro.Nivel - 1)) / 10) + 500;
+        _pontos += 500 * (monstro.Nivel - 1) / 10 + 500;
         ProximoNivel();
     }
 
-    private void ProximoNivel()
+    protected virtual void ProximoNivel()
     {
-        var proximoNivel = 500 * (Nivel ^ 2) - (500 * Nivel);
-        if (_pontos < proximoNivel) { return; }
+        var proximoNivel = 500 * (Nivel ^ 2) - 500 * Nivel;
+        if (_pontos < proximoNivel) return;
         _pontos -= proximoNivel;
         Defesa += 10;
         Dano += 10;
@@ -46,19 +46,25 @@ public class Jogador : Personagem
 
     public bool Fugir(Monstro monstro)
     {
-        var probabilidadeSucesso = (50 * Agilidade) / monstro.Agilidade;
+        var probabilidadeSucesso = 50 * Agilidade / monstro.Agilidade;
         var dado = new Random().Next(0, 100);
         return probabilidadeSucesso < dado;
     }
 
     public void UsarItem(int posicaoItem)
     {
-        
+        var item = itens.ElementAt(posicaoItem);
+        item.Key.Efeito(this);
+        if (item.Value - 1 == 0)
+        {
+            itens.Remove(item.Key);
+            return;
+        }
+        itens[item.Key] = item.Value - 1;
     }
 
-    public void UsarHabilidade(Personagem personagemAtacado)
+    public virtual void UsarHabilidade(Personagem personagemAtacado)
     {
         Ataque(personagemAtacado, true);
     }
-
 }

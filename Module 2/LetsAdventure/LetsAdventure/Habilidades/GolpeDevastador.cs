@@ -1,6 +1,6 @@
 namespace LetsAdventure.Habilidades;
 
-public class GolspeDevastador
+public class GolpeDevastador
 {
     
 }
