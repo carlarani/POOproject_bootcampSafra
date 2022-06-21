@@ -1,0 +1,15 @@
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/bin/Debug/net6.0/LetsAdventure
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/bin/Debug/net6.0/LetsAdventure.deps.json
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/bin/Debug/net6.0/LetsAdventure.runtimeconfig.json
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/bin/Debug/net6.0/LetsAdventure.dll
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/bin/Debug/net6.0/LetsAdventure.pdb
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/LetsAdventure.csproj.AssemblyReference.cache
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/LetsAdventure.GeneratedMSBuildEditorConfig.editorconfig
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/LetsAdventure.AssemblyInfoInputs.cache
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/LetsAdventure.AssemblyInfo.cs
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/LetsAdventure.csproj.CoreCompileInputs.cache
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/LetsAdventure.dll
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/refint/LetsAdventure.dll
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/LetsAdventure.pdb
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/LetsAdventure.genruntimeconfig.cache
+/home/boehn/Documents/bootcampSafra/Module 2/LetsAdventure/LetsAdventure/obj/Debug/net6.0/ref/LetsAdventure.dll
