@@ -4,7 +4,7 @@ public class PocaoCura : Item
 {
     public PocaoCura()
     {
-        Nome = "Poção de Cura (+50 de vida)";
+        Nome = "Poção de Cura (+40 de vida)";
     }
     public override void Efeito(Jogador jogador)
     {

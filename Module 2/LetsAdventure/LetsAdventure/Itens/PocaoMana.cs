@@ -4,7 +4,7 @@ public class PocaoMana : Item
 {
     public PocaoMana()
     {
-        Nome = "Poção de Mana (+50 de mana)";
+        Nome = "Poção de Mana (+40 de mana)";
     }
     public override void Efeito(Mago mago)
     {

@@ -19,6 +19,7 @@ public class Mago : Jogador
     protected override void ProximoNivel()
     {
         base.ProximoNivel();
+        Dano += 2;
         ManaMaximo += 30;
         Defesa += 5;
     }
@@ -27,9 +28,10 @@ public class Mago : Jogador
     {
         var habilidade = (BolaDeFogo) Habilidade;
         if (Mana - habilidade.ConsumoMana < 0) { return; }
-
         Mana -= habilidade.ConsumoMana;
+        Dano += habilidade.DanoExtra;
         Ataque(personagemAtacado, true);
+        Dano -= habilidade.DanoExtra;
     }
     
 }

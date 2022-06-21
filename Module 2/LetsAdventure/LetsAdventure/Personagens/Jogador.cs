@@ -2,7 +2,7 @@ namespace LetsAdventure;
 
 public class Jogador : Personagem
 {
-    public Dictionary<Item, int> Itens { get; private set; }
+    public Dictionary<Item, int> Itens { get; protected set; }
 
     public int Pontos { get; protected set; }
 
@@ -20,9 +20,9 @@ public class Jogador : Personagem
         VidaMaxima = Vida;
     }
 
-    public void GanhaPontos()
+    public void GanhaPontos(Monstro monstro)
     {
-        Pontos += 500 * (1 - 1) / 10 + 500;
+        Pontos += 500 * (monstro.Nivel - 1) / 10 + 500;
         ProximoNivel();
     }
 
