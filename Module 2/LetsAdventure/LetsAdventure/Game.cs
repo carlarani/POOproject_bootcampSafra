@@ -246,7 +246,7 @@ namespace LetsAdventures
                     BatalhaImg(monstro);
                     break;
                 case 2:
-                    InventarioImg();
+                    InventarioImg(monstro);
                     break;
                 case 3:
                     if (_jogador.Fugir(monstro))
@@ -258,7 +258,7 @@ namespace LetsAdventures
             }
         }
 
-       private static void BatalhaImg(Jogador jogador, Monstro monstro)
+       private static void BatalhaImg(Monstro monstro)
         {
             string input = "";
             int caminhoBatalha = 0;
@@ -268,7 +268,7 @@ namespace LetsAdventures
                 Console.WriteLine("╔══════════════════════════════════════╗");
                 Console.WriteLine(monstro.Img);
                 Console.WriteLine("╠══════════════════╬═══════════════════╣");
-                Console.Write(jogador.Img);
+                Console.Write(_jogador.Img);
                 Console.WriteLine("╠══════════════════╬═══════════════════╣");
                 Console.WriteLine("║ [1] ATAQUE BÁSICO                    ║");
                 Console.WriteLine("║ [2] USAR HABILIDADE ESPECIAL         ║");
@@ -276,39 +276,37 @@ namespace LetsAdventures
                 Console.WriteLine("╚══════════════════════════════════════╝");
                 input = Console.ReadLine();
             } while (!int.TryParse(input, out caminhoBatalha) || caminhoBatalha != 1 && caminhoBatalha != 2 && caminhoBatalha != 3);
-            escolherCaminhoBatalha(caminhoBatalha, jogador, monstro);
+            EscolherCaminhoBatalha(caminhoBatalha, monstro);
         }
 
-        private static void escolherCaminhoBatalha(int caminhoBatalha, Jogador jogador, Monstro monstro)
+        private static void EscolherCaminhoBatalha(int caminhoBatalha, Monstro monstro)
         {
             switch (caminhoBatalha)
             {
                 case 1:
-                    jogador.AtaqueNormal(monstro);
+                    _jogador.AtaqueNormal(monstro);
                     break;
                 case 2:
-                    jogador.UsarHabilidade(monstro);
+                    _jogador.UsarHabilidade(monstro);
                     break;
                 case 3:
-                    EncontroInicialImg(jogador, monstro);
+                    EncontroInicialImg(monstro);
                     break;
             }
         }
 
 
-        private static void InventarioImg(Jogador jogador, Monstro monstro)
+        private static void InventarioImg(Monstro monstro)
         {
             string input = "";
             int caminhoInventario = 0;
             do
             {
-                Console.Clear();
-                var classeJogador = jogador.GetType().ToString().Remove(0, 14);
                 Console.WriteLine("╔══════════════════════════════════════╗");
                 Console.WriteLine("║            * INVENTÁRIO *            ║");
-                Console.WriteLine($"║ {jogador.Nome}                               ║");
-                Console.WriteLine($"║ {String.Format("{0,-9}", classeJogador)}                                 ║");
-                Console.WriteLine($"║ HP: {jogador.Vida:D3}/{jogador.VidaMaxima}                          ║");
+                Console.WriteLine($"║ {_jogador.Nome}                               ║");
+                Console.WriteLine($"║ {ClasseHeroi}                                 ║");
+                Console.WriteLine($"║ HP: {_jogador.Vida:D3}/{_jogador.VidaMaxima}                          ║");
                 Console.WriteLine("║                                      ║");
                 Console.WriteLine("╠══════════════════╬═══════════════════╣");
                 Console.WriteLine("║ [1] 4 un. Poção de Cura              ║");
@@ -320,10 +318,10 @@ namespace LetsAdventures
                 Console.WriteLine("╚══════════════════════════════════════╝");
                 input = Console.ReadLine();
             } while (!int.TryParse(input, out caminhoInventario) || caminhoInventario != 1 && caminhoInventario != 2 && caminhoInventario != 9);
-            escolherCaminhoInventario(caminhoInventario, jogador, monstro);
+            EscolherCaminhoInventario(caminhoInventario, monstro);
         }
 
-        private static void escolherCaminhoInventario(int caminhoInventario, Jogador jogador, Monstro monstro)
+        private static void EscolherCaminhoInventario(int caminhoInventario, Monstro monstro)
         {
             switch(caminhoInventario)
             {
@@ -334,7 +332,7 @@ namespace LetsAdventures
 
                     break;
                 case 9:
-                    EncontroInicialImg(jogador, monstro);
+                    EncontroInicialImg(monstro);
                     break;
             }
         }
