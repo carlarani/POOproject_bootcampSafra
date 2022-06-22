@@ -2,8 +2,7 @@ namespace LetsAdventure;
 
 public class Item
 {
-    private string? _nome;
-
+    public decimal Preco { get; protected set; }
     public string? Nome { get; protected set; }
 
     public virtual void Efeito(Jogador jogador) { }

@@ -4,7 +4,8 @@ namespace LetsAdventures
 {
     class Game
     {
-        static void MenuPrincipal()
+
+        private static void DisplayTitulo()
         {
             Console.WriteLine("██╗     ███████╗████████╗███████╗     █████╗ ██████╗ ██╗   ██╗███████╗███╗   ██╗████████╗██╗   ██╗██████╗ ███████╗");
             Console.WriteLine("██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██║   ██║██╔════╝████╗  ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝");
@@ -12,6 +13,10 @@ namespace LetsAdventures
             Console.WriteLine("██║     ██╔══╝     ██║   ╚════██║    ██╔══██║██║  ██║╚██╗ ██╔╝██╔══╝  ██║╚██╗██║   ██║   ██║   ██║██╔══██╗██╔══╝  ");
             Console.WriteLine("███████╗███████╗   ██║   ███████║    ██║  ██║██████╔╝ ╚████╔╝ ███████╗██║ ╚████║   ██║   ╚██████╔╝██║  ██║███████╗");
             Console.WriteLine("╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝");
+        }
+        private static void MenuPrincipal()
+        {
+            DisplayTitulo();
             Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("║                                                  Bem Vindo(a)!                                                 ║"); 
             Console.WriteLine("║                            //ˆ\\\\     {*}                           (/T\\)                                       ║");
@@ -28,12 +33,7 @@ namespace LetsAdventures
             string nomeHeroi = Console.ReadLine();
             Console.Clear();
             Console.Beep();
-            Console.WriteLine("██╗     ███████╗████████╗███████╗     █████╗ ██████╗ ██╗   ██╗███████╗███╗   ██╗████████╗██╗   ██╗██████╗ ███████╗");
-            Console.WriteLine("██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██║   ██║██╔════╝████╗  ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝");
-            Console.WriteLine("██║     █████╗     ██║   ███████╗    ███████║██║  ██║██║   ██║█████╗  ██╔██╗ ██║   ██║   ██║   ██║██████╔╝█████╗  ");
-            Console.WriteLine("██║     ██╔══╝     ██║   ╚════██║    ██╔══██║██║  ██║╚██╗ ██╔╝██╔══╝  ██║╚██╗██║   ██║   ██║   ██║██╔══██╗██╔══╝  ");
-            Console.WriteLine("███████╗███████╗   ██║   ███████║    ██║  ██║██████╔╝ ╚████╔╝ ███████╗██║ ╚████║   ██║   ╚██████╔╝██║  ██║███████╗");
-            Console.WriteLine("╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝");
+            DisplayTitulo();
             Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("║                                                                                                                ║"); 
             Console.WriteLine("║                            //ˆ\\\\     {*}         Selecione         (/T\\)                                       ║");
@@ -49,74 +49,43 @@ namespace LetsAdventures
             Console.ReadKey();
             Console.Beep();
         }
-        static void MenuMago()
+        
+        private static void MenuImg(Jogador jogador)
         {
-            Console.WriteLine("╔═════════════════════╗");
-            Console.WriteLine("║       CALEBE        ║");
-            Console.WriteLine("║       classe:       ║");
-            Console.WriteLine("║        MAGO         ║");
-            Console.WriteLine("╠═════════════════════╣");
-            Console.WriteLine("║     //ˆ\\\\     {*}   ║");
-            Console.WriteLine("║    //. .\\\\     I    ║");
-            Console.WriteLine("║    \\] - [/     I    ║");
-            Console.WriteLine("║    /l\\ /j\\     I    ║");
-            Console.WriteLine("║   /. ~~  ,\\/==(]    ║");
-            Console.WriteLine("║   \\\\    /      I    ║");
-            Console.WriteLine("║    |    |      I    ║");
-            Console.WriteLine("║   /j  L l\\     !    ║");
-            Console.WriteLine("╠═════════════════════╣");
-            Console.WriteLine("║ [1] BATALHAR        ║");
-            Console.WriteLine("║ [2] LOJA            ║");
-            Console.WriteLine("╚═════════════════════╝");
+            var classeJogador = jogador.GetType().ToString().Remove(0, 14);
+            Console.WriteLine("╔══════════════════════════════════════╗");
+            Console.WriteLine($"║            {jogador.Nome}                    ║");
+            Console.WriteLine($"║            {String.Format("{0,-9}", classeJogador)}                 ║");
+            Console.WriteLine($"║            Pontos: {jogador.Pontos:D3}               ║");
+            Console.WriteLine($"║            Nº de Vitórias: {jogador.Vitoria:D2}        ║");
+            Console.WriteLine("║                                      ║");
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.Write(jogador.Img);
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.WriteLine("║ [1] BATALHAR                         ║");
+            Console.WriteLine("║ [2] LOJA                             ║");
+            Console.WriteLine("╚══════════════════════════════════════╝");
         }
-        static void MenuGuerreiro()
+        private static void LojaImg(Jogador jogador)
         {
-            Console.WriteLine("╔═════════════════════╗");
-            Console.WriteLine("║       CALEBE        ║");
-            Console.WriteLine("║       classe:       ║");
-            Console.WriteLine("║      GUERREIRO      ║");
-            Console.WriteLine("╠═════════════════════╣");
-            Console.WriteLine("║       (/T\\)         ║");
-            Console.WriteLine("║       (-,-)   (OOOO)║");
-            Console.WriteLine("║        \\˜/      │3  ║");
-            Console.WriteLine("║      /=...'===//││  ║");
-            Console.WriteLine("║ /OOO//│   │     └┘  ║");
-            Console.WriteLine("║ O:@:O └└└└└         ║");
-            Console.WriteLine("║ \\OOO/ ││ ││         ║");
-            Console.WriteLine("║       [) (]         ║");
-            Console.WriteLine("╠═════════════════════╣");
-            Console.WriteLine("║ [1] BATALHAR        ║");
-            Console.WriteLine("║ [2] LOJA            ║");
-            Console.WriteLine("╚═════════════════════╝");
-        }
-        static void Loja()
-        {
+            var classeJogador = jogador.GetType().ToString().Remove(0, 14);
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine("║               * LOJA *               ║");
-            Console.WriteLine("║ CALEBE                               ║");
-            Console.WriteLine("║ MAGO                                 ║");
-            Console.WriteLine("║ Pontos:000                           ║");
+            Console.WriteLine($"║ {jogador.Nome}                               ║");
+            Console.WriteLine($"║ {String.Format("{0,-9}", classeJogador)}                                 ║");
+            Console.WriteLine($"║ Pontos: {jogador.Pontos:D3}                          ║");
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ [1] ↑ Aumentar HP                    ║");
-            Console.WriteLine("║ [2] ↑ Aumentar Mana                  ║");
-            Console.WriteLine("║ [3] ↑ Aumentar Dano                  ║");
-            Console.WriteLine("║ [4] ↑ Aumentar Agilidade             ║");
-            Console.WriteLine("║ [5] + Comprar Poção de Cura          ║");
-            Console.WriteLine("║ [6] + Comprar Poção de Mana          ║");
-            Console.WriteLine("║ [8] + Comprar Poção Anti-veneno      ║");
-            Console.WriteLine("║ [9] + Comprar Poção Anti-paralisia   ║");
+            Console.WriteLine("║ [1] ↑ Aumentar Agilidade             ║");
+            Console.WriteLine("║ [2] + Comprar Poção de Cura          ║");
+            Console.WriteLine("║ [3] + Comprar Poção de Mana          ║");
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
             Console.WriteLine("║ [9] VOLTAR                           ╣");
             Console.WriteLine("╚══════════════════════════════════════╝");
         }
-        static void BatalhaImg(Jogador jogador)
+        private static void BatalhaImg(Jogador jogador, Monstro monstro)
         {
             Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║                          /\\  |  /\\   ║");                 
-            Console.WriteLine("║   Aranha Mutante        //\\\\&&&//\\\\  ║");
-            Console.WriteLine("║   HP:75/100            //\\((  ))/\\\\  ║");
-            Console.WriteLine("║                        /  < ò ó >  \\ ║");
-            Console.WriteLine("║                             └ ┘      ║");
+            Console.WriteLine(monstro.Img);
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
             Console.Write(jogador.Img);
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
@@ -126,18 +95,16 @@ namespace LetsAdventures
             Console.WriteLine("╚══════════════════════════════════════╝");
         }
 
-        static void Inventario()
+        private static void InventarioImg(Jogador jogador)
         {
+            var classeJogador = jogador.GetType().ToString().Remove(0, 14);
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine("║            * INVENTÁRIO *            ║");
-            Console.WriteLine("║ CALEBE                               ║");
-            Console.WriteLine("║ MAGO                                 ║");
-            Console.WriteLine("║ HP:075/100                           ║");
-            Console.WriteLine("║ Saúde:Normal                         ║");
+            Console.WriteLine($"║ {jogador.Nome}                               ║");
+            Console.WriteLine($"║ {String.Format("{0,-9}", classeJogador)}                                 ║");
+            Console.WriteLine($"║ HP: {jogador.Vida:D3}/{jogador.VidaMaxima}                          ║");
             Console.WriteLine("║                                      ║");
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ [1] 2 un. Poção Anti-paralisia       ║");
-            Console.WriteLine("║ [2] 1 un. Poção Anti-veneno          ║");
             Console.WriteLine("║ [3] 4 un. Poção de Cura              ║");
             Console.WriteLine("║ [4] 0 un. Poção de Mana              ║");
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
@@ -153,8 +120,11 @@ namespace LetsAdventures
             // MenuMago();             
             // Loja();             
             // Inventario();
-            var mago = new Mago("Boen  ");
-            BatalhaImg(mago);
+            var mago = new Guerreiro("Boen");
+            var monstro = new Monstro(2);
+            
+            // BatalhaImg(mago, monstro);
+            MenuImg(mago);
             
         }
     }

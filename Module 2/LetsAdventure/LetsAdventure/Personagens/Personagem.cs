@@ -7,6 +7,8 @@ public class Personagem
     public string? Nome { get; set; }
 
     public int Vida { get; set; }
+    
+    public int VidaMaxima { get; protected set; }
 
     public int Dano { get; protected set; }
 
@@ -16,7 +18,7 @@ public class Personagem
 
     public int Nivel { get; protected set; }
 
-    public virtual string Img { get; protected set; }
+    public string Img { get; protected set; }
 
     public Habilidade Habilidade { get; protected set; }
 

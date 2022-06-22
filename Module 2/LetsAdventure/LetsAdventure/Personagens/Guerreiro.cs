@@ -16,11 +16,11 @@ public sealed class Guerreiro : Jogador
     protected override string CreateImg()
     {
         var img = new StringBuilder();
-        img.Append(" (/T\\)\n");
-        img.Append(" (-,-)   (OOOO)\n");
-        img.Append("  \\˜/     ││3\n");
-        img.Append("/=...'===//││\n");
-        img.Append(" │   │     └┘");
+        img.Append("║ (/T\\)                                ║\n");
+        img.Append($"║ (-,-)   (OOOO)      {Nome}           ║\n");
+        img.Append($"║  \\˜/      │3        HP:{Vida:D3}/{VidaMaxima}       ║\n");
+        img.Append("║/=...'===//││                         ║\n");
+        img.Append("║ │   │     └┘                         ║\n");
         return img.ToString();
     }
     

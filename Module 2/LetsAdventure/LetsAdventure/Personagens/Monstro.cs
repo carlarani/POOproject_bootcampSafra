@@ -1,19 +1,22 @@
+using System.Text;
 using LetsAdventure.Habilidades;
 
 namespace LetsAdventure;
 
-public class Monstro : Personagem
+public sealed class Monstro : Personagem
 {
 
     public Monstro(int nivel)
     {
-        Nome = "Criatura amorfa";
+        Nome = "Aranha Mutante";
         Vida = 150;
+        VidaMaxima = Vida;
         Nivel = nivel;
         Defesa = 12 + 10*(nivel - 1);
         Dano = 5 + 10*(nivel - 1);
         Agilidade = 20 + 15*(nivel - 1);
         Habilidade = new GolpeDevastador();
+        Img = CreateImg();
     }
 
     public void Ataque(Personagem personagemAtacado)
@@ -27,6 +30,17 @@ public class Monstro : Personagem
             return;
         }
         base.Ataque(personagemAtacado);
+    }
+    
+    protected override string CreateImg()
+    {
+        var img = new StringBuilder();
+        img.Append("║                          /\\  |  /\\   ║\n");  
+        img.Append($"║   {Nome}        //\\\\&&&//\\\\  ║\n");
+        img.Append($"║   HP:{Vida:D3}/{VidaMaxima}            //\\((  ))/\\\\ ║\n");
+        img.Append("║                        /  < ò ó >  \\ ║\n");
+        img.Append("║                             └ ┘      ║");
+        return img.ToString();
     }
 
     public string Difamar()
