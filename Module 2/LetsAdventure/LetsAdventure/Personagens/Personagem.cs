@@ -29,13 +29,15 @@ public class Personagem
 
     private void SofreDano(Personagem personagemAtacante, bool usaHabilidade)
     {
+        // double dano = personagemAtacante.Dano * (100 / (100 + Defesa));
+        int dano = 10;
         if (usaHabilidade)
         {
-            Vida -= (personagemAtacante.Dano + personagemAtacante.Habilidade.DanoExtra) * (100 / (100 + Defesa));
-            return;
+             // dano = (personagemAtacante.Dano + personagemAtacante.Habilidade.DanoExtra) * (100 / (100 + Defesa));
+             dano = 20;
         }
-
-        Vida -= personagemAtacante.Dano * (100 / (100 + Defesa));
+        
+        Vida -= dano;
     }
 
     protected void Ataque(Personagem personagemAtacado, bool usaHabilidade = false)

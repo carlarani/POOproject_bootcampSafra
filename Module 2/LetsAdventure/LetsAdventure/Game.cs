@@ -295,7 +295,7 @@ namespace LetsAdventures
             switch (caminhoBatalha)
             {
                 case 1:
-                    Console.WriteLine($"{_jogador.Nome} deu um ataque normal!");
+                    Console.WriteLine($"{_jogador.Nome.Trim()} deu um ataque normal!");
                     _jogador.AtaqueNormal(monstro);
                     break;
                 case 2:
@@ -308,38 +308,49 @@ namespace LetsAdventures
         private static void InventarioImg(Monstro monstro)
         {
             string input;
-            int caminhoInventario;
-            do
+            int linhas = 11;
+            
+            Console.WriteLine("╔══════════════════════════════════════╗");
+            Console.WriteLine("║            * INVENTÁRIO *            ║");
+            Console.WriteLine($"║ {_jogador.Nome}                               ║");
+            Console.WriteLine($"║ {ClasseHeroi}                                 ║");
+            Console.WriteLine($"║ HP: {_jogador.Vida:D3}/{_jogador.VidaMaxima}                          ║");
+            Console.WriteLine("║                                      ║");
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.WriteLine("║ [1] 4 un. Poção de Cura              ║");
+            Console.WriteLine("║ [2] 0 un. Poção de Mana              ║");
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.WriteLine("║ [9] VOLTAR                           ║");
+            Console.WriteLine("╚══════════════════════════════════════╝");
+            var opcoes = new [] { "1", "2", "9"};
+            bool inputValido = false;
+            int caminhoInventario = 0;
+
+            while (!inputValido || caminhoInventario != 9)
             {
-                Console.WriteLine("╔══════════════════════════════════════╗");
-                Console.WriteLine("║            * INVENTÁRIO *            ║");
-                Console.WriteLine($"║ {_jogador.Nome}                               ║");
-                Console.WriteLine($"║ {ClasseHeroi}                                 ║");
-                Console.WriteLine($"║ HP: {_jogador.Vida:D3}/{_jogador.VidaMaxima}                          ║");
-                Console.WriteLine("║                                      ║");
-                Console.WriteLine("╠══════════════════╬═══════════════════╣");
-                Console.WriteLine("║ [1] 4 un. Poção de Cura              ║");
-                Console.WriteLine("║ [2] 0 un. Poção de Mana              ║");
-                Console.WriteLine("╠══════════════════╬═══════════════════╣");
-                Console.WriteLine("║ [9] VOLTAR                           ║");
-                Console.WriteLine("╚══════════════════════════════════════╝");
+                Console.Write("O que fazer? ");
                 input = Console.ReadLine();
-            } while (!int.TryParse(input, out caminhoInventario) || caminhoInventario != 1 && caminhoInventario != 2 && caminhoInventario != 9);
-            EscolherCaminhoInventario(caminhoInventario, monstro);
+                inputValido = int.TryParse(input, out caminhoInventario);
+                if (inputValido && opcoes.Any(input.Contains))
+                {
+                    EscolherCaminhoInventario(caminhoInventario);
+                    linhas++;
+                }
+                linhas++;
+            }
+            AnimacaoLimpaTela(linhas);
+            EncontroInicialImg(monstro);
         }
 
-        private static void EscolherCaminhoInventario(int caminhoInventario, Monstro monstro)
+        private static void EscolherCaminhoInventario(int caminhoInventario)
         {
             switch(caminhoInventario)
             {
                 case 1:
-
+                    Console.WriteLine($"{_jogador.Nome} usou Poção");
                     break;
                 case 2:
-
-                    break;
-                case 9:
-                    EncontroInicialImg(monstro);
+                    Console.WriteLine($"{_jogador.Nome} usou Poção");
                     break;
             }
         }
