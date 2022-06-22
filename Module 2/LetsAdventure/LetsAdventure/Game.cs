@@ -295,7 +295,7 @@ namespace LetsAdventures
             switch (caminhoBatalha)
             {
                 case 1:
-                    Console.WriteLine($"{_jogador.Nome.Trim()} deu um ataque normal!");
+                    Console.WriteLine($"{_jogador.Nome} deu um ataque normal!");
                     _jogador.AtaqueNormal(monstro);
                     break;
                 case 2:

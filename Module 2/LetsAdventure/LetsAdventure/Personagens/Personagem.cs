@@ -21,23 +21,24 @@ public class Personagem
     public string Img { get; protected set; }
 
     public Habilidade Habilidade { get; protected set; }
-
-    protected virtual string CreateImg()
+    
+    public virtual void CreateImg()
     {
-        return " @ _ @";
+        Img = " @ _ @";
     }
 
     private void SofreDano(Personagem personagemAtacante, bool usaHabilidade)
     {
-        // double dano = personagemAtacante.Dano * (100 / (100 + Defesa));
+        // TODO: ARRUMAR FÓRMULA
+        // int dano = personagemAtacante.Dano * (Defesa + 100/ 100);
         int dano = 10;
         if (usaHabilidade)
         {
-             // dano = (personagemAtacante.Dano + personagemAtacante.Habilidade.DanoExtra) * (100 / (100 + Defesa));
-             dano = 20;
+            dano = 20;
+            // dano = (personagemAtacante.Dano + personagemAtacante.Habilidade.DanoExtra) * (Defesa + 100/ 100);
         }
-        
         Vida -= dano;
+        CreateImg();
     }
 
     protected void Ataque(Personagem personagemAtacado, bool usaHabilidade = false)

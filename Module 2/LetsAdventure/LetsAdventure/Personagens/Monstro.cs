@@ -16,7 +16,7 @@ public sealed class Monstro : Personagem
         Dano = 5 + 10*(nivel - 1);
         Agilidade = 20 + 15*(nivel - 1);
         Habilidade = new GolpeDevastador();
-        Img = CreateImg();
+        CreateImg();
     }
 
     public void Ataque(Personagem personagemAtacado)
@@ -32,7 +32,7 @@ public sealed class Monstro : Personagem
         base.Ataque(personagemAtacado);
     }
     
-    protected override string CreateImg()
+    public override void CreateImg()
     {
         var img = new StringBuilder();
         img.Append("║                          /\\  |  /\\   ║\n");  
@@ -40,7 +40,7 @@ public sealed class Monstro : Personagem
         img.Append($"║   HP:{Vida:D3}/{VidaMaxima}            //\\((  ))/\\\\ ║\n");
         img.Append("║                        /  < ò ó >  \\ ║\n");
         img.Append("║                             └ ┘      ║");
-        return img.ToString();
+        Img = img.ToString();
     }
 
     public string Difamar()

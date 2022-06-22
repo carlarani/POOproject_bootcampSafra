@@ -10,10 +10,10 @@ public sealed class Guerreiro : Jogador
     {
         _espada = new Espada();
         Habilidade = new GolpeDevastador();
-        Img = CreateImg();
+        CreateImg();
     }
 
-    protected override string CreateImg()
+    public override void CreateImg()
     {
         var img = new StringBuilder();
         img.Append("║ (/T\\)                                ║\n");
@@ -21,7 +21,7 @@ public sealed class Guerreiro : Jogador
         img.Append($"║  \\˜/      │3        HP:{Vida:D3}/{VidaMaxima}       ║\n");
         img.Append("║/=...'===//││                         ║\n");
         img.Append("║ │   │     └┘                         ║\n");
-        return img.ToString();
+        Img = img.ToString();
     }
     
     public override void UsarHabilidade(Personagem personagemAtacado)

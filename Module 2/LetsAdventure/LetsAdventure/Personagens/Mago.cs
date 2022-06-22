@@ -15,7 +15,7 @@ public sealed class Mago : Jogador
         ManaMaximo = Mana;
         Habilidade = new BolaDeFogo();
         Defesa = 2;
-        Img = CreateImg();
+        CreateImg();
     }
 
     protected override void ProximoNivel()
@@ -26,7 +26,7 @@ public sealed class Mago : Jogador
         Defesa += 5;
     }
 
-    protected override string CreateImg()
+    public override void CreateImg()
     {
         var img = new StringBuilder();
         img.Append("║  //ˆ\\\\     {*}                       ║\n");
@@ -34,7 +34,7 @@ public sealed class Mago : Jogador
         img.Append($"║ \\] - [/     I     HP:{Vida:D3}/{VidaMaxima}         ║\n");
         img.Append("║ /l\\ /j\\     I                        ║\n");
         img.Append("║/. ~~  ,\\/==(]                        ║\n");
-        return img.ToString();
+        Img = img.ToString();
     }
 
     public override void UsarHabilidade(Personagem personagemAtacado)
