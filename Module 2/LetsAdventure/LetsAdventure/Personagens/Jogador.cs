@@ -60,7 +60,12 @@ public class Jogador : Personagem
 
     public void AdicionarItem(Item item)
     {
-        Itens[item] += 1;
+        if (Itens.ContainsKey(item))
+        {
+            Itens[item] += 1;
+            return;
+        }
+        Itens.Add(item, 1);
     }
     
     public void AtaqueNormal(Personagem personagemAtacado)

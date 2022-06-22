@@ -187,7 +187,7 @@ namespace LetsAdventures
                 Console.Write("O que fazer? ");
                 input = Console.ReadLine();
                 inputValido = int.TryParse(input, out caminhoLoja);
-                if (inputValido && !opcoes.Any(input.Contains))
+                if (inputValido && opcoes.Any(input.Contains))
                 {
                     EscolherCaminhoLoja(caminhoLoja);
                     linhas++;
