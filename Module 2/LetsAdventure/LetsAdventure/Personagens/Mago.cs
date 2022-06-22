@@ -30,7 +30,7 @@ public sealed class Mago : Jogador
     {
         var img = new StringBuilder();
         img.Append("║  //ˆ\\\\     {*}                       ║\n");
-        img.Append($"║ //. .\\\\     I     {Nome}             ║\n");
+        img.Append($"║ //. .\\\\     I     {Nome}: Nível {Nivel}    ║\n");
         img.Append($"║ \\] - [/     I     HP:{Vida:D3}/{VidaMaxima}         ║\n");
         img.Append("║ /l\\ /j\\     I                        ║\n");
         img.Append("║/. ~~  ,\\/==(]                        ║\n");

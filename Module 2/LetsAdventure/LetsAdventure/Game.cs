@@ -42,7 +42,7 @@ namespace LetsAdventures
             {
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
                 LimpaLinha();
-                Thread.Sleep(300);
+                Thread.Sleep(250);
             }
         }
 
@@ -71,7 +71,6 @@ namespace LetsAdventures
             Console.WriteLine("║ Pressione Enter para continuar...                                                                              ║");
             Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
             Console.ReadLine();
-            Console.Beep();
             Thread.Sleep(450);
             AnimacaoLimpaTela(14);
         }
@@ -108,7 +107,6 @@ namespace LetsAdventures
                 input = Console.ReadLine();
                 linhas++;
             } while (!int.TryParse(input, out escolha) || escolha != 1 && escolha != 2);
-            Console.Beep();
             _jogador = escolha == 1 ? new Mago(nomeHeroi) : new Guerreiro(nomeHeroi);
             AnimacaoLimpaTela(linhas);
         }
@@ -194,7 +192,6 @@ namespace LetsAdventures
                 }
                 linhas++;
             }
-           
             AnimacaoLimpaTela(linhas);
             MenuImg();
         }
@@ -217,7 +214,7 @@ namespace LetsAdventures
         {
             string input;
             int caminhoEncontroInicial;
-            var linhas = 7 + _jogador.Img.Split('\n').Length + monstro.Img.Split('\n').Length;
+            var linhas = 6 + _jogador.Img.Split('\n').Length + monstro.Img.Split('\n').Length;
             
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine(monstro.Img);
@@ -235,8 +232,8 @@ namespace LetsAdventures
                 input = Console.ReadLine();
                 linhas++;
             } while (!int.TryParse(input, out caminhoEncontroInicial) || !opcoes.Any(input.Contains));
-            EscolherCaminhoEncontroInicial(caminhoEncontroInicial, monstro);
             AnimacaoLimpaTela(linhas);
+            EscolherCaminhoEncontroInicial(caminhoEncontroInicial, monstro);
         }
 
         private static void EscolherCaminhoEncontroInicial(int caminhoEncontroInicial, Monstro monstro)
@@ -254,18 +251,20 @@ namespace LetsAdventures
                         MenuImg();
                     else
                         BatalhaImg(monstro);
-                    
                     break;                    
             }
         }
 
        private static void BatalhaImg(Monstro monstro)
         {
-            string input = "";
-            int caminhoBatalha = 0;
-            do
+            string input;
+            int caminhoBatalha;
+            var opcoes = new [] { "1", "2"};
+            bool validInput = false;
+
+            while (!validInput || monstro.Vida > 0)
             {
-                Console.Clear();
+                var linhas = 7 + _jogador.Img.Split('\n').Length + monstro.Img.Split('\n').Length;
                 Console.WriteLine("╔══════════════════════════════════════╗");
                 Console.WriteLine(monstro.Img);
                 Console.WriteLine("╠══════════════════╬═══════════════════╣");
@@ -273,11 +272,22 @@ namespace LetsAdventures
                 Console.WriteLine("╠══════════════════╬═══════════════════╣");
                 Console.WriteLine("║ [1] ATAQUE BÁSICO                    ║");
                 Console.WriteLine("║ [2] USAR HABILIDADE ESPECIAL         ║");
-                Console.WriteLine("║ [3] VOLTAR                           ║");
                 Console.WriteLine("╚══════════════════════════════════════╝");
+                
+                Console.Write("O que fazer? ");
                 input = Console.ReadLine();
-            } while (!int.TryParse(input, out caminhoBatalha) || caminhoBatalha != 1 && caminhoBatalha != 2 && caminhoBatalha != 3);
-            EscolherCaminhoBatalha(caminhoBatalha, monstro);
+                validInput = int.TryParse(input, out caminhoBatalha);
+                if (validInput && opcoes.Any(input.Contains))
+                {
+                    linhas++;
+                    EscolherCaminhoBatalha(caminhoBatalha, monstro);
+                    Thread.Sleep(3000);
+                }
+                monstro.Ataque(_jogador);
+                Console.WriteLine($"{monstro.Nome} atacou {_jogador.Nome}");
+                Thread.Sleep(3000);
+                AnimacaoLimpaTela(linhas);
+            }
         }
 
         private static void EscolherCaminhoBatalha(int caminhoBatalha, Monstro monstro)
@@ -285,22 +295,20 @@ namespace LetsAdventures
             switch (caminhoBatalha)
             {
                 case 1:
+                    Console.WriteLine($"{_jogador.Nome} deu um ataque normal!");
                     _jogador.AtaqueNormal(monstro);
                     break;
                 case 2:
+                    Console.WriteLine($"{_jogador.Nome} usou sua habilidade {_jogador.Habilidade.Nome}!");
                     _jogador.UsarHabilidade(monstro);
-                    break;
-                case 3:
-                    EncontroInicialImg(monstro);
                     break;
             }
         }
 
-
         private static void InventarioImg(Monstro monstro)
         {
-            string input = "";
-            int caminhoInventario = 0;
+            string input;
+            int caminhoInventario;
             do
             {
                 Console.WriteLine("╔══════════════════════════════════════╗");
@@ -314,8 +322,6 @@ namespace LetsAdventures
                 Console.WriteLine("║ [2] 0 un. Poção de Mana              ║");
                 Console.WriteLine("╠══════════════════╬═══════════════════╣");
                 Console.WriteLine("║ [9] VOLTAR                           ║");
-                Console.WriteLine("║ O que o herói irá fazer?             ║");
-                Console.WriteLine("║ ...                                  ║");
                 Console.WriteLine("╚══════════════════════════════════════╝");
                 input = Console.ReadLine();
             } while (!int.TryParse(input, out caminhoInventario) || caminhoInventario != 1 && caminhoInventario != 2 && caminhoInventario != 9);
@@ -343,11 +349,7 @@ namespace LetsAdventures
             TelaBemVindo();
             SelecaoHeroi();
             MenuImg();
-            
-            foreach(var entry in _jogador.Itens)
-            {
-                Console.Write($"{entry.Key.Nome}: {entry.Value}");
-            }
+
         }
     }
 }

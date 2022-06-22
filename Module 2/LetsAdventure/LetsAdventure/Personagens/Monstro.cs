@@ -36,7 +36,7 @@ public sealed class Monstro : Personagem
     {
         var img = new StringBuilder();
         img.Append("║                          /\\  |  /\\   ║\n");  
-        img.Append($"║   {Nome}        //\\\\&&&//\\\\  ║\n");
+        img.Append($"║ {Nome}: Nível {Nivel} //\\\\&&&//\\\\  ║\n");
         img.Append($"║   HP:{Vida:D3}/{VidaMaxima}            //\\((  ))/\\\\ ║\n");
         img.Append("║                        /  < ò ó >  \\ ║\n");
         img.Append("║                             └ ┘      ║");
