@@ -58,7 +58,7 @@ namespace LetsAdventures
             DisplayAnimacaoTitulo();
             Thread.Sleep(450);
             Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║                                                  Bem-Vindo, Herói!                                             ║"); 
+            Console.WriteLine("║                                                Bem-Vindo, Herói!                                               ║"); 
             Console.WriteLine("║                            //ˆ\\\\     {*}                           (/T\\)                                       ║");
             Console.WriteLine("║                           //. .\\\\     I                            (-,-)   (OOOO)                              ║");
             Console.WriteLine("║                           \\] - [/     I                             \\˜/      │3                                ║");
