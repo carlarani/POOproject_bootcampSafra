@@ -258,36 +258,87 @@ namespace LetsAdventures
             }
         }
 
-        private static void BatalhaImg(Monstro monstro)
+       private static void BatalhaImg(Jogador jogador, Monstro monstro)
         {
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine(monstro.Img);
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.Write(_jogador.Img);
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ [1] ATAQUE BÁSICO                    ║");
-            Console.WriteLine("║ [2] USAR HABILIDADE ESPECIAL         ║");
-            Console.WriteLine("║ [3] VOLTAR                           ║");
-            Console.WriteLine("╚══════════════════════════════════════╝");
+            string input = "";
+            int caminhoBatalha = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("╔══════════════════════════════════════╗");
+                Console.WriteLine(monstro.Img);
+                Console.WriteLine("╠══════════════════╬═══════════════════╣");
+                Console.Write(jogador.Img);
+                Console.WriteLine("╠══════════════════╬═══════════════════╣");
+                Console.WriteLine("║ [1] ATAQUE BÁSICO                    ║");
+                Console.WriteLine("║ [2] USAR HABILIDADE ESPECIAL         ║");
+                Console.WriteLine("║ [3] VOLTAR                           ║");
+                Console.WriteLine("╚══════════════════════════════════════╝");
+                input = Console.ReadLine();
+            } while (!int.TryParse(input, out caminhoBatalha) || caminhoBatalha != 1 && caminhoBatalha != 2 && caminhoBatalha != 3);
+            escolherCaminhoBatalha(caminhoBatalha, jogador, monstro);
         }
 
-        private static void InventarioImg()
+        private static void escolherCaminhoBatalha(int caminhoBatalha, Jogador jogador, Monstro monstro)
         {
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║            * INVENTÁRIO *            ║");
-            Console.WriteLine($"║ {_jogador.Nome}                               ║");
-            Console.WriteLine($"║ {ClasseHeroi}                                 ║");
-            Console.WriteLine($"║ HP: {_jogador.Vida:D3}/{_jogador.VidaMaxima}                          ║");
-            Console.WriteLine("║                                      ║");
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ [1] 4 un. Poção de Cura              ║");
-            Console.WriteLine("║ [2] 0 un. Poção de Mana              ║");
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ [9] VOLTAR                           ║");
-            Console.WriteLine("║ O que o herói irá fazer?             ║");
-            Console.WriteLine("║ ...                                  ║");
-            Console.WriteLine("╚══════════════════════════════════════╝");
+            switch (caminhoBatalha)
+            {
+                case 1:
+                    jogador.AtaqueNormal(monstro);
+                    break;
+                case 2:
+                    jogador.UsarHabilidade(monstro);
+                    break;
+                case 3:
+                    EncontroInicialImg(jogador, monstro);
+                    break;
+            }
         }
+
+
+        private static void InventarioImg(Jogador jogador, Monstro monstro)
+        {
+            string input = "";
+            int caminhoInventario = 0;
+            do
+            {
+                Console.Clear();
+                var classeJogador = jogador.GetType().ToString().Remove(0, 14);
+                Console.WriteLine("╔══════════════════════════════════════╗");
+                Console.WriteLine("║            * INVENTÁRIO *            ║");
+                Console.WriteLine($"║ {jogador.Nome}                               ║");
+                Console.WriteLine($"║ {String.Format("{0,-9}", classeJogador)}                                 ║");
+                Console.WriteLine($"║ HP: {jogador.Vida:D3}/{jogador.VidaMaxima}                          ║");
+                Console.WriteLine("║                                      ║");
+                Console.WriteLine("╠══════════════════╬═══════════════════╣");
+                Console.WriteLine("║ [1] 4 un. Poção de Cura              ║");
+                Console.WriteLine("║ [2] 0 un. Poção de Mana              ║");
+                Console.WriteLine("╠══════════════════╬═══════════════════╣");
+                Console.WriteLine("║ [9] VOLTAR                           ║");
+                Console.WriteLine("║ O que o herói irá fazer?             ║");
+                Console.WriteLine("║ ...                                  ║");
+                Console.WriteLine("╚══════════════════════════════════════╝");
+                input = Console.ReadLine();
+            } while (!int.TryParse(input, out caminhoInventario) || caminhoInventario != 1 && caminhoInventario != 2 && caminhoInventario != 9);
+            escolherCaminhoInventario(caminhoInventario, jogador, monstro);
+        }
+
+        private static void escolherCaminhoInventario(int caminhoInventario, Jogador jogador, Monstro monstro)
+        {
+            switch(caminhoInventario)
+            {
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 9:
+                    EncontroInicialImg(jogador, monstro);
+                    break;
+            }
+        }
+        
         public static void Main(string[] args)
         {
             TelaBemVindo();
