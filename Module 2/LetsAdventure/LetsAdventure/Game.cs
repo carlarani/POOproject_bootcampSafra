@@ -165,7 +165,6 @@ namespace LetsAdventures
         private static void LojaImg()
         {
             string input;
-            int caminhoLoja;
             var linhas = 11;
             
             Console.WriteLine("╔══════════════════════════════════════╗");
@@ -180,14 +179,23 @@ namespace LetsAdventures
             Console.WriteLine("║ [9] VOLTAR                           ╣");
             Console.WriteLine("╚══════════════════════════════════════╝");
             var opcoes = new [] { "1", "2", "9"};
-            do
+            bool inputValido = false;
+            int caminhoLoja = 0;
+
+            while (!inputValido || caminhoLoja != 9)
             {
                 Console.Write("O que fazer? ");
                 input = Console.ReadLine();
+                inputValido = int.TryParse(input, out caminhoLoja);
+                if (inputValido && !opcoes.Any(input.Contains))
+                {
+                    EscolherCaminhoLoja(caminhoLoja);
+                    linhas++;
+                }
                 linhas++;
-            } while (!int.TryParse(input, out caminhoLoja) || !opcoes.Any(input.Contains));
-            EscolherCaminhoLoja(caminhoLoja);
+            }
             AnimacaoLimpaTela(linhas);
+            MenuImg();
         }
 
         private static void EscolherCaminhoLoja(int caminhoLoja)
@@ -195,19 +203,14 @@ namespace LetsAdventures
             switch(caminhoLoja)
             {
                 case 1: 
-                    
+                    Console.WriteLine("Poção de Cura comprada!");
+                    _jogador.AdicionarItem(new PocaoCura());
                     break;
                 case 2:
-
+                    Console.WriteLine("Poção de Mana comprada!");
+                    _jogador.AdicionarItem(new PocaoMana());
                     break;
-                case 3:
-
-                    break;
-                case 9:
-                    MenuImg();
-                    break;
-            }    
-
+            }
         }
         private static void EncontroInicialImg(Monstro monstro)
         {
@@ -290,6 +293,11 @@ namespace LetsAdventures
             TelaBemVindo();
             SelecaoHeroi();
             MenuImg();
+            
+            foreach(var entry in _jogador.Itens)
+            {
+                Console.Write($"{entry.Key.Nome}: {entry.Value}");
+            }
         }
     }
 }

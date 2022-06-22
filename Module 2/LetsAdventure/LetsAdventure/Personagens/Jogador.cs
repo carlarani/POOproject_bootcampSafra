@@ -3,7 +3,7 @@ namespace LetsAdventure;
 public class Jogador : Personagem
 {
     public int Vitoria { get; protected set; }
-    public Dictionary<Item, int> Itens { get; protected set; }
+    public Dictionary<Item , int> Itens { get; protected set; }
 
     public int Pontos { get; protected set; }
 
@@ -56,6 +56,11 @@ public class Jogador : Personagem
         }
         Itens[item.Key] = item.Value - 1;
         
+    }
+
+    public void AdicionarItem(Item item)
+    {
+        Itens[item] += 1;
     }
     
     public void AtaqueNormal(Personagem personagemAtacado)
