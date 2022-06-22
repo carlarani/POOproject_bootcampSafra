@@ -264,7 +264,7 @@ namespace LetsAdventures
 
             while (!validInput || monstro.Vida > 0)
             {
-                var linhas = 7 + _jogador.Img.Split('\n').Length + monstro.Img.Split('\n').Length;
+                var linhas = 8 + _jogador.Img.Split('\n').Length + monstro.Img.Split('\n').Length;
                 Console.WriteLine("╔══════════════════════════════════════╗");
                 Console.WriteLine(monstro.Img);
                 Console.WriteLine("╠══════════════════╬═══════════════════╣");
@@ -284,6 +284,7 @@ namespace LetsAdventures
                     Thread.Sleep(3000);
                 }
                 monstro.Ataque(_jogador);
+                Console.WriteLine($"{monstro.Nome} diz: {monstro.Difamar()}");
                 Console.WriteLine($"{monstro.Nome} atacou {_jogador.Nome}");
                 Thread.Sleep(3000);
                 AnimacaoLimpaTela(linhas);
@@ -313,7 +314,7 @@ namespace LetsAdventures
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine("║            * INVENTÁRIO *            ║");
             Console.WriteLine($"║ {_jogador.Nome}                               ║");
-            Console.WriteLine($"║ {ClasseHeroi}                                 ║");
+            Console.WriteLine($"║ {ClasseHeroi}                            ║");
             Console.WriteLine($"║ HP: {_jogador.Vida:D3}/{_jogador.VidaMaxima}                          ║");
             Console.WriteLine("║                                      ║");
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
