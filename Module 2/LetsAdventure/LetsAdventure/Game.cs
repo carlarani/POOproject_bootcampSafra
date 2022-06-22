@@ -4,28 +4,61 @@ namespace LetsAdventures
 {
     class Game
     {
-        public static int tipoHeroi;
-        private static string nomeHeroi;
-        public static string NomeHeroi
+        private static Jogador _jogador = new Jogador("");
+        
+        private static string? ClasseHeroi
         {
-            get { return nomeHeroi; }
-            set { NomeHeroi = value; }
+            get { return String.Format("{0,-9}", _jogador.GetType().Name);}
+        }
+
+        private static string[] _titulo =
+        {
+            "██╗     ███████╗████████╗███████╗     █████╗ ██████╗ ██╗   ██╗███████╗███╗   ██╗████████╗██╗   ██╗██████╗ ███████╗\n",
+            "██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██║   ██║██╔════╝████╗  ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝\n",
+            "██║     █████╗     ██║   ███████╗    ███████║██║  ██║██║   ██║█████╗  ██╔██╗ ██║   ██║   ██║   ██║██████╔╝█████╗  \n",
+            "██║     ██╔══╝     ██║   ╚════██║    ██╔══██║██║  ██║╚██╗ ██╔╝██╔══╝  ██║╚██╗██║   ██║   ██║   ██║██╔══██╗██╔══╝  \n",
+            "███████╗███████╗   ██║   ███████║    ██║  ██║██████╔╝ ╚████╔╝ ███████╗██║ ╚████║   ██║   ╚██████╔╝██║  ██║███████╗\n",
+            "╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝\n",
+            "==================================================================================================================\n"
+        };
+
+        private static void DisplayAnimacaoTitulo()
+        {
+            foreach (var linha in _titulo)
+            {
+                Console.Write(linha);
+                Thread.Sleep(450);
+            }
         }
 
         private static void DisplayTitulo()
         {
-            Console.WriteLine("██╗     ███████╗████████╗███████╗     █████╗ ██████╗ ██╗   ██╗███████╗███╗   ██╗████████╗██╗   ██╗██████╗ ███████╗");
-            Console.WriteLine("██║     ██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██║   ██║██╔════╝████╗  ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝");
-            Console.WriteLine("██║     █████╗     ██║   ███████╗    ███████║██║  ██║██║   ██║█████╗  ██╔██╗ ██║   ██║   ██║   ██║██████╔╝█████╗  ");
-            Console.WriteLine("██║     ██╔══╝     ██║   ╚════██║    ██╔══██║██║  ██║╚██╗ ██╔╝██╔══╝  ██║╚██╗██║   ██║   ██║   ██║██╔══██╗██╔══╝  ");
-            Console.WriteLine("███████╗███████╗   ██║   ███████║    ██║  ██║██████╔╝ ╚████╔╝ ███████╗██║ ╚████║   ██║   ╚██████╔╝██║  ██║███████╗");
-            Console.WriteLine("╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝");
+            Console.Write(string.Join("", _titulo));
         }
-        private static void MenuPrincipal()
+
+        private static void AnimacaoLimpaTela(int linhas)
         {
-            DisplayTitulo();
+            for (var i = 0; i < linhas; i++)
+            {
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                LimpaLinha();
+                Thread.Sleep(300);
+            }
+        }
+
+        private static void LimpaLinha()
+        {
+            var currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth)); 
+            Console.SetCursorPosition(0, currentLineCursor);
+        }
+        private static void TelaBemVindo()
+        {
+            DisplayAnimacaoTitulo();
+            Thread.Sleep(450);
             Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║                                                  Bem Vindo(a)!                                                 ║"); 
+            Console.WriteLine("║                                                  Bem-Vindo, Herói!                                             ║"); 
             Console.WriteLine("║                            //ˆ\\\\     {*}                           (/T\\)                                       ║");
             Console.WriteLine("║                           //. .\\\\     I                            (-,-)   (OOOO)                              ║");
             Console.WriteLine("║                           \\] - [/     I                             \\˜/      │3                                ║");
@@ -34,109 +67,130 @@ namespace LetsAdventures
             Console.WriteLine("║                          \\\\    /      I                     O:@:O └└└└└                                        ║");
             Console.WriteLine("║                           |    |      I                      \\OOO/ ││ ││                                       ║");
             Console.WriteLine("║                          /j  L l\\     !                            [) (]                                       ║");
+            Console.WriteLine("║                                                                                                                ║"); 
+            Console.WriteLine("║ Pressione Enter para continuar...                                                                              ║");
+            Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            Console.ReadLine();
+            Console.Beep();
+            Thread.Sleep(450);
+            AnimacaoLimpaTela(14);
+        }
+
+        private static void SelecaoHeroi()
+        {
+            Console.Write("Bravo Herói, qual seu nome? ");
+            var nomeHeroi = Console.ReadLine();
+            Console.Beep();
+            if (nomeHeroi.Length > 6)
+            {
+                nomeHeroi = nomeHeroi.Remove(6);
+            }
+            
+            string input;
+            int escolha;
+            var linhas = 13;
+            
+            Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("║                                                                                                                ║");
+            Console.WriteLine("║                            //ˆ\\\\     {*}         Selecione         (/T\\)                                       ║");
+            Console.WriteLine("║     [1] MAGO              //. .\\\\     I         sua classe!        (-,-)   (OOOO)            [2] GUERREIRO     ║");
+            Console.WriteLine("║                           \\] - [/     I                             \\˜/      │3                                ║");
+            Console.WriteLine("║                           /l\\ /j\\     I                         _ /=...'===//││                                ║");
+            Console.WriteLine("║                          /. ~~  ,\\/==(]                      /OOO//│   │     └┘                                ║");
+            Console.WriteLine("║                          \\\\    /      I                     O:@:O └└└└└                                        ║");
+            Console.WriteLine("║                           |    |      I                      \\OOO/ ││ ││                                       ║");
+            Console.WriteLine("║                          /j  L l\\     !                            [) (]                                       ║");
             Console.WriteLine("║                                                                                                                ║");
             Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
-            Console.Write("Bravo Herói, qual seu Nome? ");
-            nomeHeroi = Console.ReadLine();
-            if(nomeHeroi.Length>6)
-                nomeHeroi=nomeHeroi.Remove(6);
-
-            string input = "";
             do
             {
-                Console.Clear();
-                Console.Beep();
-                DisplayTitulo();
-                Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                Console.WriteLine("║                                                                                                                ║");
-                Console.WriteLine("║                            //ˆ\\\\     {*}         Selecione         (/T\\)                                       ║");
-                Console.WriteLine("║     [1] MAGO              //. .\\\\     I         sua classe!        (-,-)   (OOOO)            [2] GUERREIRO     ║");
-                Console.WriteLine("║                           \\] - [/     I                             \\˜/      │3                                ║");
-                Console.WriteLine("║                           /l\\ /j\\     I                         _ /=...'===//││                                ║");
-                Console.WriteLine("║                          /. ~~  ,\\/==(]                      /OOO//│   │     └┘                                ║");
-                Console.WriteLine("║                          \\\\    /      I                     O:@:O └└└└└                                        ║");
-                Console.WriteLine("║                           |    |      I                      \\OOO/ ││ ││                                       ║");
-                Console.WriteLine("║                          /j  L l\\     !                            [) (]                                       ║");
-                Console.WriteLine("║                                                                                                                ║");
-                Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                input =Console.ReadLine();
-            }while (!int.TryParse(input, out tipoHeroi) || tipoHeroi!=1 && tipoHeroi!=2);
+                Console.Write("Classe: ");
+                input = Console.ReadLine();
+                linhas++;
+            } while (!int.TryParse(input, out escolha) || escolha != 1 && escolha != 2);
             Console.Beep();
+            _jogador = escolha == 1 ? new Mago(nomeHeroi) : new Guerreiro(nomeHeroi);
+            AnimacaoLimpaTela(linhas);
         }
-
-             
-        private static void MenuImg(Jogador jogador)
+        
+        private static void MenuImg()
         {
             string input;
-            input = " ";
-            int caminhoMenuImg=0;
+            int caminhoMenuImg;
+            var linhas = 10 + _jogador.Img.Split('\n').Length;
+            
+            Console.WriteLine("╔══════════════════════════════════════╗");
+            Console.WriteLine($"║            {_jogador.Nome}                    ║");
+            Console.WriteLine($"║            {ClasseHeroi}                 ║");
+            Console.WriteLine($"║            Pontos: {_jogador.Pontos:D3}               ║");
+            Console.WriteLine($"║            Nº de Vitórias: {_jogador.Vitoria:D2}        ║");
+            Console.WriteLine("║                                      ║");
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.Write(_jogador.Img);
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.WriteLine("║ [1] BATALHAR                         ║");
+            Console.WriteLine("║ [2] LOJA                             ║");
+            Console.WriteLine("╚══════════════════════════════════════╝");
+            var opcoes = new [] { "1", "2"};
             do
             {
-                Console.Clear();
-                var classeJogador = jogador.GetType().ToString().Remove(0, 14);
-                Console.WriteLine("╔══════════════════════════════════════╗");
-                Console.WriteLine($"║            {jogador.Nome}                    ║");
-                Console.WriteLine($"║            {String.Format("{0,-9}", classeJogador)}                 ║");
-                Console.WriteLine($"║            Pontos: {jogador.Pontos:D3}               ║");
-                Console.WriteLine($"║            Nº de Vitórias: {jogador.Vitoria:D2}        ║");
-                Console.WriteLine("║                                      ║");
-                Console.WriteLine("╠══════════════════╬═══════════════════╣");
-                Console.Write(jogador.Img);
-                Console.WriteLine("╠══════════════════╬═══════════════════╣");
-                Console.WriteLine("║ [1] BATALHAR                         ║");
-                Console.WriteLine("║ [2] LOJA                             ║");
-                Console.WriteLine("╚══════════════════════════════════════╝");
+                Console.Write("O que fazer? ");
                 input = Console.ReadLine();
-            }while (!int.TryParse(input, out caminhoMenuImg) || caminhoMenuImg != 1 && caminhoMenuImg != 2);
-            escolherCaminhoMenuImg(jogador, caminhoMenuImg);
+                linhas++;
+            } while (!int.TryParse(input, out caminhoMenuImg) || !opcoes.Any(input.Contains));
+            AnimacaoLimpaTela(linhas);
+            EscolherCaminhoMenuImg(caminhoMenuImg);
         }
 
-        private static Monstro gerarMonstro()
+        private static Monstro GerarMonstro()
         {
-            var dado = new Random().Next(1,5);
-            Monstro monstro001 = new Monstro(dado);
+            var nivel = new Random().Next(1,5);
+            var monstro001 = new Monstro(nivel);
             return monstro001;
         }
         
-        private static void escolherCaminhoMenuImg(Jogador jogador, int caminhoMenuImg)
+        private static void EscolherCaminhoMenuImg(int caminhoMenuImg)
         {
             switch (caminhoMenuImg)
             {
                 case 1:
-                    EncontroInicialImg(jogador, gerarMonstro());
+                    EncontroInicialImg(GerarMonstro());
                     break;
                 case 2:
-                    LojaImg(jogador);
+                    LojaImg();
                     break;
             }
         }    
 
-        private static void LojaImg(Jogador jogador)
+        private static void LojaImg()
         {
-            string input = "";
-            int caminhoLoja = 0;
+            string input;
+            int caminhoLoja;
+            var linhas = 11;
+            
+            Console.WriteLine("╔══════════════════════════════════════╗");
+            Console.WriteLine("║               * LOJA *               ║");
+            Console.WriteLine($"║ {_jogador.Nome}                               ║");
+            Console.WriteLine($"║ {ClasseHeroi}                            ║");
+            Console.WriteLine($"║ Pontos: {_jogador.Pontos:D3}                          ║");
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.WriteLine("║ [1] + Comprar Poção de Cura          ║");
+            Console.WriteLine("║ [2] + Comprar Poção de Mana          ║");
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.WriteLine("║ [9] VOLTAR                           ╣");
+            Console.WriteLine("╚══════════════════════════════════════╝");
+            var opcoes = new [] { "1", "2", "9"};
             do
             {
-                Console.Clear();
-                var classeJogador = jogador.GetType().ToString().Remove(0, 14);
-                Console.WriteLine("╔══════════════════════════════════════╗");
-                Console.WriteLine("║               * LOJA *               ║");
-                Console.WriteLine($"║ {jogador.Nome}                               ║");
-                Console.WriteLine($"║ {String.Format("{0,-9}", classeJogador)}                            ║");
-                Console.WriteLine($"║ Pontos: {jogador.Pontos:D3}                          ║");
-                Console.WriteLine("╠══════════════════╬═══════════════════╣");
-                Console.WriteLine("║ [1] ↑ Aumentar Agilidade             ║");
-                Console.WriteLine("║ [2] + Comprar Poção de Cura          ║");
-                Console.WriteLine("║ [3] + Comprar Poção de Mana          ║");
-                Console.WriteLine("╠══════════════════╬═══════════════════╣");
-                Console.WriteLine("║ [9] VOLTAR                           ╣");
-                Console.WriteLine("╚══════════════════════════════════════╝");
+                Console.Write("O que fazer? ");
                 input = Console.ReadLine();
-            } while (!int.TryParse(input, out caminhoLoja) || caminhoLoja != 1 && caminhoLoja != 2 && caminhoLoja != 3 && caminhoLoja != 9);
-            escolherCaminhoLoja(caminhoLoja, jogador);
+                linhas++;
+            } while (!int.TryParse(input, out caminhoLoja) || !opcoes.Any(input.Contains));
+            EscolherCaminhoLoja(caminhoLoja);
+            AnimacaoLimpaTela(linhas);
         }
 
-        private static void escolherCaminhoLoja(int caminhoLoja, Jogador jogador)
+        private static void EscolherCaminhoLoja(int caminhoLoja)
         {
             switch(caminhoLoja)
             {
@@ -150,59 +204,63 @@ namespace LetsAdventures
 
                     break;
                 case 9:
-                    MenuImg(jogador);
+                    MenuImg();
                     break;
             }    
 
         }
-        private static void EncontroInicialImg(Jogador jogador, Monstro monstro)
+        private static void EncontroInicialImg(Monstro monstro)
         {
-            string input = "";
-            int caminhoEncontroInicial = 0;
+            string input;
+            int caminhoEncontroInicial;
+            var linhas = 7 + _jogador.Img.Split('\n').Length + monstro.Img.Split('\n').Length;
+            
+            Console.WriteLine("╔══════════════════════════════════════╗");
+            Console.WriteLine(monstro.Img);
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.Write(_jogador.Img);
+            Console.WriteLine("╠══════════════════╬═══════════════════╣");
+            Console.WriteLine("║ [1] LUTAR                            ║");
+            Console.WriteLine("║ [2] INVENTÁRIO                       ║");
+            Console.WriteLine("║ [3] FUGIR                            ║");
+            Console.WriteLine("╚══════════════════════════════════════╝");
+            var opcoes = new [] { "1", "2", "3"};
             do
             {
-                Console.Clear();
-                Console.WriteLine("╔══════════════════════════════════════╗");
-                Console.WriteLine(monstro.Img);
-                Console.WriteLine("╠══════════════════╬═══════════════════╣");
-                Console.Write(jogador.Img);
-                Console.WriteLine("╠══════════════════╬═══════════════════╣");
-                Console.WriteLine("║ [1] LUTAR                            ║");
-                Console.WriteLine("║ [2] INVENTÁRIO                       ║");
-                Console.WriteLine("║ [3] FUGIR                            ║");
-                Console.WriteLine("╚══════════════════════════════════════╝");
+                Console.Write("O que fazer? ");
                 input = Console.ReadLine();
-            } while (!int.TryParse(input, out caminhoEncontroInicial) || caminhoEncontroInicial != 1 && caminhoEncontroInicial != 2 && caminhoEncontroInicial != 3);
-            escolherCaminhoEncontroInicial(caminhoEncontroInicial, jogador, monstro);
+                linhas++;
+            } while (!int.TryParse(input, out caminhoEncontroInicial) || !opcoes.Any(input.Contains));
+            EscolherCaminhoEncontroInicial(caminhoEncontroInicial, monstro);
+            AnimacaoLimpaTela(linhas);
         }
 
-        private static void escolherCaminhoEncontroInicial(int caminhoEncontroInicial, Jogador jogador, Monstro monstro)
+        private static void EscolherCaminhoEncontroInicial(int caminhoEncontroInicial, Monstro monstro)
         {
             switch(caminhoEncontroInicial)
             {
                 case 1:
-                    BatalhaImg(jogador, monstro);
+                    BatalhaImg(monstro);
                     break;
                 case 2:
-                    InventarioImg(jogador);
+                    InventarioImg();
                     break;
                 case 3:
-                    if (jogador.Fugir(monstro))
-                        MenuImg(jogador);
+                    if (_jogador.Fugir(monstro))
+                        MenuImg();
                     else
-                        BatalhaImg(jogador, monstro);
+                        BatalhaImg(monstro);
                     
                     break;                    
             }
         }
 
-        private static void BatalhaImg(Jogador jogador, Monstro monstro)
+        private static void BatalhaImg(Monstro monstro)
         {
-            Console.Clear();
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine(monstro.Img);
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.Write(jogador.Img);
+            Console.Write(_jogador.Img);
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
             Console.WriteLine("║ [1] ATAQUE BÁSICO                    ║");
             Console.WriteLine("║ [2] USAR HABILIDADE ESPECIAL         ║");
@@ -210,15 +268,13 @@ namespace LetsAdventures
             Console.WriteLine("╚══════════════════════════════════════╝");
         }
 
-        private static void InventarioImg(Jogador jogador)
+        private static void InventarioImg()
         {
-            Console.Clear();
-            var classeJogador = jogador.GetType().ToString().Remove(0, 14);
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine("║            * INVENTÁRIO *            ║");
-            Console.WriteLine($"║ {jogador.Nome}                               ║");
-            Console.WriteLine($"║ {String.Format("{0,-9}", classeJogador)}                                 ║");
-            Console.WriteLine($"║ HP: {jogador.Vida:D3}/{jogador.VidaMaxima}                          ║");
+            Console.WriteLine($"║ {_jogador.Nome}                               ║");
+            Console.WriteLine($"║ {ClasseHeroi}                                 ║");
+            Console.WriteLine($"║ HP: {_jogador.Vida:D3}/{_jogador.VidaMaxima}                          ║");
             Console.WriteLine("║                                      ║");
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
             Console.WriteLine("║ [1] 4 un. Poção de Cura              ║");
@@ -231,37 +287,9 @@ namespace LetsAdventures
         }
         public static void Main(string[] args)
         {
-
-            MenuPrincipal();
-            Jogador player001 = new Jogador(NomeHeroi);
-            if (tipoHeroi == 1)
-            {
-                player001 = new Mago(NomeHeroi);
-
-            }
-            else if (tipoHeroi == 2)
-            {
-                player001 = new Guerreiro(NomeHeroi);
-            }
-            MenuImg(player001);
-            
-
-        }
-            
-            
-
-
-
-
-            // MenuGuerreiro();             
-            // MenuMago();             
-            // Loja();             
-            // Inventario();
-            //var mago = new Guerreiro("Boen");
-            //var monstro = new Monstro(2);
-
-            //// BatalhaImg(mago, monstro);
-            //MenuImg(mago);
-
+            TelaBemVindo();
+            SelecaoHeroi();
+            MenuImg();
         }
     }
+}
