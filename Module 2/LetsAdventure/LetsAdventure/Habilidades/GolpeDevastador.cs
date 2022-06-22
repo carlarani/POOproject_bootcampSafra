@@ -4,7 +4,7 @@ public class GolpeDevastador : Habilidade
 {
     public GolpeDevastador()
     {
-        Nome = "Gole devastador";
+        Nome = "Golpe devastador";
         DanoExtra = 20;
     }
 }

@@ -16,9 +16,14 @@ public class Personagem
 
     public int Nivel { get; protected set; }
 
-    public string Img { get; protected set; }
+    public virtual string Img { get; protected set; }
 
     public Habilidade Habilidade { get; protected set; }
+
+    protected virtual string CreateImg()
+    {
+        return " @ _ @";
+    }
 
     private void SofreDano(Personagem personagemAtacante, bool usaHabilidade)
     {
@@ -31,7 +36,7 @@ public class Personagem
         Vida -= personagemAtacante.Dano * (100 / (100 + Defesa));
     }
 
-    public void Ataque(Personagem personagemAtacado, bool usaHabilidade = false)
+    protected void Ataque(Personagem personagemAtacado, bool usaHabilidade = false)
     {
         personagemAtacado.SofreDano(this, usaHabilidade);
     }

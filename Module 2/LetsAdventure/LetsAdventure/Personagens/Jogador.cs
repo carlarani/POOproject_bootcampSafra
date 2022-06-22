@@ -55,6 +55,12 @@ public class Jogador : Personagem
             return;
         }
         Itens[item.Key] = item.Value - 1;
+        
+    }
+    
+    public void AtaqueNormal(Personagem personagemAtacado)
+    {
+        Ataque(personagemAtacado);
     }
 
     public virtual void UsarHabilidade(Personagem personagemAtacado)

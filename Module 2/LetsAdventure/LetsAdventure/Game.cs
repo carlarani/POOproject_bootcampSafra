@@ -1,6 +1,4 @@
-using System.Drawing;
-using System.Reflection;
-using System;
+using LetsAdventure;
 
 namespace LetsAdventures
 {
@@ -111,7 +109,7 @@ namespace LetsAdventures
             Console.WriteLine("║ [9] VOLTAR                           ╣");
             Console.WriteLine("╚══════════════════════════════════════╝");
         }
-        static void MagoBatalhaAranhaMutante()
+        static void BatalhaImg(Jogador jogador)
         {
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine("║                          /\\  |  /\\   ║");                 
@@ -120,78 +118,14 @@ namespace LetsAdventures
             Console.WriteLine("║                        /  < ò ó >  \\ ║");
             Console.WriteLine("║                             └ ┘      ║");
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║  //ˆ\\\\     {*}                       ║");
-            Console.WriteLine("║ //. .\\\\     I     Calebe             ║");
-            Console.WriteLine("║ \\] - [/     I     HP:100/100         ║");
-            Console.WriteLine("║ /l\\ /j\\     I     + normal           ║");
-            Console.WriteLine("║/. ~~  ,\\/==(]                        ║");
+            Console.Write(jogador.Img);
             Console.WriteLine("╠══════════════════╬═══════════════════╣");
             Console.WriteLine("║ [1] LUTAR                            ║");
             Console.WriteLine("║ [2] INVENTÁRIO                       ║");
             Console.WriteLine("║ [3] FUGIR                            ║");
             Console.WriteLine("╚══════════════════════════════════════╝");
         }
-        static void MagoBatalhaAlmaPenada()
-        {
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║                              .-.     ║");
-            Console.WriteLine("║   Alma Penada            Y  (ò ó) y  ║");
-            Console.WriteLine("║   HP:75/100               \\ | O \\/   ║");
-            Console.WriteLine("║                             \\    \\   ║");
-            Console.WriteLine("║                              `~~~  ║");
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║  //ˆ\\\\     {*}                       ║");
-            Console.WriteLine("║ //. .\\\\     I     Calebe             ║");
-            Console.WriteLine("║ \\] - [/     I     HP:100/100         ║");
-            Console.WriteLine("║ /l\\ /j\\     I     + normal           ║");
-            Console.WriteLine("║/. ~~  ,\\/==(]                        ║");
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ [1] LUTAR                            ║");
-            Console.WriteLine("║ [2] INVENTÁRIO                       ║");
-            Console.WriteLine("║ [3] FUGIR                            ║");
-            Console.WriteLine("╚══════════════════════════════════════╝");
-        }
-        
-        static void GuerreiroBatalhaAranhaMurante()
-        {
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║                          /\\  |  /\\   ║");                 
-            Console.WriteLine("║   Aranha Mutante        //\\\\&&&//\\\\  ║");
-            Console.WriteLine("║   HP:75/100            //\\((  ))/\\\\  ║");
-            Console.WriteLine("║                        /  < ò ó >  \\ ║");
-            Console.WriteLine("║                             └ ┘      ║");
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ (/T\\)                                ║");
-            Console.WriteLine("║ (-,-)   (OOOO)      Calebe           ║");
-            Console.WriteLine("║  \\˜/      │3        HP:100/100       ║");
-            Console.WriteLine("║/=...'===//││        + normal         ║");
-            Console.WriteLine("║ │   │     └┘                         ║");
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ [1] LUTAR                            ║");
-            Console.WriteLine("║ [2] INVENTÁRIO                       ║");
-            Console.WriteLine("║ [3] FUGIR                            ║");
-            Console.WriteLine("╚══════════════════════════════════════╝");
-        }
-        static void GuerreiroBatalhaAlmaPenada()
-        {
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║                              .-.     ║");
-            Console.WriteLine("║   Alma Penada            Y  (ò ó) y  ║");
-            Console.WriteLine("║   HP:75/100               \\ | O \\/   ║");
-            Console.WriteLine("║                             \\    \\   ║");
-            Console.WriteLine("║                              `~~~  ║");
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ (/T\\)                                ║");
-            Console.WriteLine("║ (-,-)   (OOOO)      Calebe           ║");
-            Console.WriteLine("║  \\˜/      │3        HP:100/100       ║");
-            Console.WriteLine("║/=...'===//││        + normal         ║");
-            Console.WriteLine("║ │   │     └┘                         ║");
-            Console.WriteLine("╠══════════════════╬═══════════════════╣");
-            Console.WriteLine("║ [1] LUTAR                            ║");
-            Console.WriteLine("║ [2] INVENTÁRIO                       ║");
-            Console.WriteLine("║ [3] FUGIR                            ║");
-            Console.WriteLine("╚══════════════════════════════════════╝");
-        }
+
         static void Inventario()
         {
             Console.WriteLine("╔══════════════════════════════════════╗");
@@ -214,15 +148,14 @@ namespace LetsAdventures
         }
         public static void Main(string[] args)
         {
-            MenuPrincipal();             
-            MenuGuerreiro();             
-            MenuMago();             
-            Loja();             
-            Inventario();
-            GuerreiroBatalhaAranhaMurante();             
-            GuerreiroBatalhaAlmaPenada();             
-            MagoBatalhaAranhaMutante();             
-            MagoBatalhaAlmaPenada();        
+            // MenuPrincipal();             
+            // MenuGuerreiro();             
+            // MenuMago();             
+            // Loja();             
+            // Inventario();
+            var mago = new Mago("Boen  ");
+            BatalhaImg(mago);
+            
         }
     }
 }
