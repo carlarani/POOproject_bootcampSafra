@@ -165,7 +165,7 @@ namespace LetsAdventures
         private static void LojaImg()
         {
             string input;
-            var linhas = 11;
+            var linhas = 10;
             
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine("║               * LOJA *               ║");
@@ -194,6 +194,7 @@ namespace LetsAdventures
                 }
                 linhas++;
             }
+           
             AnimacaoLimpaTela(linhas);
             MenuImg();
         }
